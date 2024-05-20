@@ -1,0 +1,662 @@
+{
+	"info": {
+		"_postman_id": "1057ef16-509a-4171-bdf5-723658a22b11",
+		"name": "api-pymes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24069772"
+	},
+	"item": [
+		{
+			"name": "GET ALL Pymes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Birthdate is in a valid date format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(person) {",
+							"        pm.expect(person.birthdate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);",
+							"    });",
+							"});",
+							"",
+							"// Add a test to validate the response schema",
+							"pm.test(\"Response schema is valid\", function () {",
+							"  var schema = {",
+							"    type: \"array\",",
+							"    items: {",
+							"      type: \"object\",",
+							"      properties: {",
+							"        personId: { type: \"number\" },",
+							"        documentType: {",
+							"          type: \"object\",",
+							"          properties: {",
+							"            id: { type: \"number\" },",
+							"            description: { type: \"string\" }",
+							"          },",
+							"          required: [\"id\", \"description\"]",
+							"        },",
+							"        documentNumber: { type: \"string\" },",
+							"        firstName: { type: \"string\" },",
+							"        lastName: { type: \"string\" },",
+							"        secondLastName: { type: \"string\" },",
+							"        gender: { type: \"string\" },",
+							"        maritalStatus: { type: \"string\" },",
+							"        birthdate: { type: \"string\" },",
+							"        isCustomer: { type: \"boolean\" },",
+							"        email: { type: \"string\" },",
+							"        phoneNumber: { type: \"number\" },",
+							"        registerDate: { type: \"string\" }",
+							"      },",
+							"      required: [\"personId\", \"documentType\", \"documentNumber\", \"firstName\", \"lastName\", \"secondLastName\", \"gender\", \"maritalStatus\", \"birthdate\", \"isCustomer\", \"email\", \"phoneNumber\", \"registerDate\"]",
+							"    }",
+							"  };",
+							"",
+							"  var response = pm.response.json();",
+							"  pm.expect(tv4.validate(response, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{pURL}}:{{pPuerto}}/api/v1/pymes",
+					"host": [
+						"{{pURL}}"
+					],
+					"port": "{{pPuerto}}",
+					"path": [
+						"api",
+						"v1",
+						"pymes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET ALL",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pURL}}:8011/api/v1/pymes",
+							"host": [
+								"{{pURL}}"
+							],
+							"port": "8011",
+							"path": [
+								"api",
+								"v1",
+								"pymes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Mon, 20 May 2024 05:53:03 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "620"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"quotationId\": 4000,\n        \"name\": \"Seguro Pyme FULL\",\n        \"detail\": \"detalle\",\n        \"coverage\": \"cobertura\",\n        \"premium\": \"0.00\",\n        \"deductible\": \"0.00\",\n        \"sum_assured\": \"0.00\",\n        \"start_date\": \"2024-05-20\",\n        \"end_date\": \"2024-06-20\",\n        \"company\": \"Compania\",\n        \"contact_name\": \"Judiht\",\n        \"contact_email\": \"prueba@gmail.com\",\n        \"contact_phone\": \"936528741\"\n    },\n    {\n        \"id\": 3,\n        \"quotationId\": 2000,\n        \"name\": \"Seguro Pyme\",\n        \"detail\": \"detalle\",\n        \"coverage\": \"cobertura\",\n        \"premium\": \"0.00\",\n        \"deductible\": \"0.00\",\n        \"sum_assured\": \"0.00\",\n        \"start_date\": \"2024-05-20\",\n        \"end_date\": \"2024-06-20\",\n        \"company\": \"Compania\",\n        \"contact_name\": \"Judiht\",\n        \"contact_email\": \"prueba@gmail.com\",\n        \"contact_phone\": \"936528741\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GET PYME",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Birthdate is in a valid date format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(person) {",
+							"        pm.expect(person.birthdate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);",
+							"    });",
+							"});",
+							"",
+							"// Add a test to validate the response schema",
+							"pm.test(\"Response schema is valid\", function () {",
+							"  var schema = {",
+							"    type: \"array\",",
+							"    items: {",
+							"      type: \"object\",",
+							"      properties: {",
+							"        personId: { type: \"number\" },",
+							"        documentType: {",
+							"          type: \"object\",",
+							"          properties: {",
+							"            id: { type: \"number\" },",
+							"            description: { type: \"string\" }",
+							"          },",
+							"          required: [\"id\", \"description\"]",
+							"        },",
+							"        documentNumber: { type: \"string\" },",
+							"        firstName: { type: \"string\" },",
+							"        lastName: { type: \"string\" },",
+							"        secondLastName: { type: \"string\" },",
+							"        gender: { type: \"string\" },",
+							"        maritalStatus: { type: \"string\" },",
+							"        birthdate: { type: \"string\" },",
+							"        isCustomer: { type: \"boolean\" },",
+							"        email: { type: \"string\" },",
+							"        phoneNumber: { type: \"number\" },",
+							"        registerDate: { type: \"string\" }",
+							"      },",
+							"      required: [\"personId\", \"documentType\", \"documentNumber\", \"firstName\", \"lastName\", \"secondLastName\", \"gender\", \"maritalStatus\", \"birthdate\", \"isCustomer\", \"email\", \"phoneNumber\", \"registerDate\"]",
+							"    }",
+							"  };",
+							"",
+							"  var response = pm.response.json();",
+							"  pm.expect(tv4.validate(response, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{pURL}}:{{pPuerto}}/api/v1/pyme/1",
+					"host": [
+						"{{pURL}}"
+					],
+					"port": "{{pPuerto}}",
+					"path": [
+						"api",
+						"v1",
+						"pyme",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pURL}}:{{pPuerto}}/api/v1/pyme/1",
+							"host": [
+								"{{pURL}}"
+							],
+							"port": "{{pPuerto}}",
+							"path": [
+								"api",
+								"v1",
+								"pyme",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Mon, 20 May 2024 03:45:15 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "306"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"quotationId\": 1000,\n    \"name\": \"Seguro Pyme\",\n    \"detail\": \"detalle\",\n    \"coverage\": \"cobertura\",\n    \"premium\": \"0.00\",\n    \"deductible\": \"0.00\",\n    \"sum_assured\": \"0.00\",\n    \"start_date\": \"2024-05-20\",\n    \"end_date\": \"2024-06-20\",\n    \"company\": \"Compania\",\n    \"contact_name\": \"Judiht\",\n    \"contact_email\": \"prueba@gmail.com\",\n    \"contact_phone\": \"936528741\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CREATE PYME",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Birthdate is in a valid date format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(person) {",
+							"        pm.expect(person.birthdate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);",
+							"    });",
+							"});",
+							"",
+							"// Add a test to validate the response schema",
+							"pm.test(\"Response schema is valid\", function () {",
+							"  var schema = {",
+							"    type: \"array\",",
+							"    items: {",
+							"      type: \"object\",",
+							"      properties: {",
+							"        personId: { type: \"number\" },",
+							"        documentType: {",
+							"          type: \"object\",",
+							"          properties: {",
+							"            id: { type: \"number\" },",
+							"            description: { type: \"string\" }",
+							"          },",
+							"          required: [\"id\", \"description\"]",
+							"        },",
+							"        documentNumber: { type: \"string\" },",
+							"        firstName: { type: \"string\" },",
+							"        lastName: { type: \"string\" },",
+							"        secondLastName: { type: \"string\" },",
+							"        gender: { type: \"string\" },",
+							"        maritalStatus: { type: \"string\" },",
+							"        birthdate: { type: \"string\" },",
+							"        isCustomer: { type: \"boolean\" },",
+							"        email: { type: \"string\" },",
+							"        phoneNumber: { type: \"number\" },",
+							"        registerDate: { type: \"string\" }",
+							"      },",
+							"      required: [\"personId\", \"documentType\", \"documentNumber\", \"firstName\", \"lastName\", \"secondLastName\", \"gender\", \"maritalStatus\", \"birthdate\", \"isCustomer\", \"email\", \"phoneNumber\", \"registerDate\"]",
+							"    }",
+							"  };",
+							"",
+							"  var response = pm.response.json();",
+							"  pm.expect(tv4.validate(response, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quotationId\": \"2000\",\r\n    \"name\": \"Seguro Pyme\",\r\n    \"description\": \"detalle\",\r\n    \"coverage\": \"cobertura\",\r\n    \"premium\": 0,\r\n    \"deductible\": 0,\r\n    \"coverage_limit\": 0,\r\n    \"start_date\": \"2024-05-20\",\r\n    \"end_date\": \"2024-06-20\",\r\n    \"company\": \"Compania\",\r\n    \"contact_person\": \"Judiht\",\r\n    \"contact_email\": \"prueba@gmail.com\",\r\n    \"contact_phone\": \"936528741\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pURL}}:8011/api/v1/pyme",
+					"host": [
+						"{{pURL}}"
+					],
+					"port": "8011",
+					"path": [
+						"api",
+						"v1",
+						"pyme"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "CREATE",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quotationId\": \"2000\",\r\n    \"name\": \"Seguro Pyme\",\r\n    \"description\": \"detalle\",\r\n    \"coverage\": \"cobertura\",\r\n    \"premium\": 0,\r\n    \"deductible\": 0,\r\n    \"coverage_limit\": 0,\r\n    \"start_date\": \"2024-05-20\",\r\n    \"end_date\": \"2024-06-20\",\r\n    \"company\": \"Compania\",\r\n    \"contact_person\": \"Judiht\",\r\n    \"contact_email\": \"prueba@gmail.com\",\r\n    \"contact_phone\": \"936528741\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pURL}}:8011/api/v1/pyme",
+							"host": [
+								"{{pURL}}"
+							],
+							"port": "8011",
+							"path": [
+								"api",
+								"v1",
+								"pyme"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Mon, 20 May 2024 05:51:03 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "39"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Pyme created successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "PUT PYME",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Birthdate is in a valid date format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(person) {",
+							"        pm.expect(person.birthdate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);",
+							"    });",
+							"});",
+							"",
+							"// Add a test to validate the response schema",
+							"pm.test(\"Response schema is valid\", function () {",
+							"  var schema = {",
+							"    type: \"array\",",
+							"    items: {",
+							"      type: \"object\",",
+							"      properties: {",
+							"        personId: { type: \"number\" },",
+							"        documentType: {",
+							"          type: \"object\",",
+							"          properties: {",
+							"            id: { type: \"number\" },",
+							"            description: { type: \"string\" }",
+							"          },",
+							"          required: [\"id\", \"description\"]",
+							"        },",
+							"        documentNumber: { type: \"string\" },",
+							"        firstName: { type: \"string\" },",
+							"        lastName: { type: \"string\" },",
+							"        secondLastName: { type: \"string\" },",
+							"        gender: { type: \"string\" },",
+							"        maritalStatus: { type: \"string\" },",
+							"        birthdate: { type: \"string\" },",
+							"        isCustomer: { type: \"boolean\" },",
+							"        email: { type: \"string\" },",
+							"        phoneNumber: { type: \"number\" },",
+							"        registerDate: { type: \"string\" }",
+							"      },",
+							"      required: [\"personId\", \"documentType\", \"documentNumber\", \"firstName\", \"lastName\", \"secondLastName\", \"gender\", \"maritalStatus\", \"birthdate\", \"isCustomer\", \"email\", \"phoneNumber\", \"registerDate\"]",
+							"    }",
+							"  };",
+							"",
+							"  var response = pm.response.json();",
+							"  pm.expect(tv4.validate(response, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Seguro Pyme FULL\",\r\n  \"description\": \"detalle\",\r\n  \"coverage\": \"cobertura\",\r\n  \"premium\": 0,\r\n  \"deductible\": 0,\r\n  \"coverage_limit\": 0,\r\n  \"start_date\": \"2024-05-20\",\r\n  \"end_date\": \"2024-06-20\",\r\n  \"company\": \"Compania\",\r\n  \"contact_person\": \"Judiht\",\r\n  \"contact_email\": \"prueba@gmail.com\",\r\n  \"contact_phone\": \"936528741\",\r\n  \"quotationId\": \"4000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pURL}}:8011/api/v1/pyme/1",
+					"host": [
+						"{{pURL}}"
+					],
+					"port": "8011",
+					"path": [
+						"api",
+						"v1",
+						"pyme",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "PUT",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Seguro Pyme FULL\",\r\n  \"description\": \"detalle\",\r\n  \"coverage\": \"cobertura\",\r\n  \"premium\": 0,\r\n  \"deductible\": 0,\r\n  \"coverage_limit\": 0,\r\n  \"start_date\": \"2024-05-20\",\r\n  \"end_date\": \"2024-06-20\",\r\n  \"company\": \"Compania\",\r\n  \"contact_person\": \"Judiht\",\r\n  \"contact_email\": \"prueba@gmail.com\",\r\n  \"contact_phone\": \"936528741\",\r\n  \"quotationId\": \"4000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pURL}}:8011/api/v1/pyme/2",
+							"host": [
+								"{{pURL}}"
+							],
+							"port": "8011",
+							"path": [
+								"api",
+								"v1",
+								"pyme",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Mon, 20 May 2024 05:52:36 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "39"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"PYME updated successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE  PYME",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Birthdate is in a valid date format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(person) {",
+							"        pm.expect(person.birthdate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);",
+							"    });",
+							"});",
+							"",
+							"// Add a test to validate the response schema",
+							"pm.test(\"Response schema is valid\", function () {",
+							"  var schema = {",
+							"    type: \"array\",",
+							"    items: {",
+							"      type: \"object\",",
+							"      properties: {",
+							"        personId: { type: \"number\" },",
+							"        documentType: {",
+							"          type: \"object\",",
+							"          properties: {",
+							"            id: { type: \"number\" },",
+							"            description: { type: \"string\" }",
+							"          },",
+							"          required: [\"id\", \"description\"]",
+							"        },",
+							"        documentNumber: { type: \"string\" },",
+							"        firstName: { type: \"string\" },",
+							"        lastName: { type: \"string\" },",
+							"        secondLastName: { type: \"string\" },",
+							"        gender: { type: \"string\" },",
+							"        maritalStatus: { type: \"string\" },",
+							"        birthdate: { type: \"string\" },",
+							"        isCustomer: { type: \"boolean\" },",
+							"        email: { type: \"string\" },",
+							"        phoneNumber: { type: \"number\" },",
+							"        registerDate: { type: \"string\" }",
+							"      },",
+							"      required: [\"personId\", \"documentType\", \"documentNumber\", \"firstName\", \"lastName\", \"secondLastName\", \"gender\", \"maritalStatus\", \"birthdate\", \"isCustomer\", \"email\", \"phoneNumber\", \"registerDate\"]",
+							"    }",
+							"  };",
+							"",
+							"  var response = pm.response.json();",
+							"  pm.expect(tv4.validate(response, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{pURL}}:{{pPuerto}}/api/v1/pyme/1",
+					"host": [
+						"{{pURL}}"
+					],
+					"port": "{{pPuerto}}",
+					"path": [
+						"api",
+						"v1",
+						"pyme",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DELETE",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{pURL}}:{{pPuerto}}/api/v1/pyme/1",
+							"host": [
+								"{{pURL}}"
+							],
+							"port": "{{pPuerto}}",
+							"path": [
+								"api",
+								"v1",
+								"pyme",
+								"1"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Mon, 20 May 2024 03:50:47 GMT"
+						},
+						{
+							"key": "server",
+							"value": "uvicorn"
+						},
+						{
+							"key": "content-length",
+							"value": "123"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"detail\": {\n        \"error-code\": \"ERR0030\",\n        \"error-message\": \"Error, id not found\",\n        \"trace-id\": \"b2ee6c30-f691-4815-9e42-678b900c410e\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
